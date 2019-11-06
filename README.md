@@ -24,13 +24,13 @@ Running ChExAlign
 Running from a jar file:
 
 ```{r, engine='sh', count_lines}
-java -Xmx20G -jar chexalign.jar <options - see below>
+java -Xmx10G -jar chexalign.jar <options - see below>
 ```
 
-In the above, the “-Xmx20G” argument tells java to use up to 20GB of memory. If you have installed source code from github, and if all classes are in your CLASSPATH, you can run ChExMix as follows:
+In the above, the “-Xmx10G” argument tells java to use up to 10GB of memory. If you have installed source code from github, and if all classes are in your CLASSPATH, you can run ChExMix as follows:
 
 ```{r, engine='sh', count_lines}
-java -Xmx20G org.seqcode.projects.chexalign.ChExAlign <options - see below>
+java -Xmx10G org.seqcode.projects.chexalign.ChExAlign <options - see below>
 ```
 
 Options (Required/important options are in __bold__)
@@ -52,7 +52,7 @@ __Loading Data__:
   * --__ctrlCONDNAME-REPNAME__ \<file\>: Optional arguments. Defines a file containing reads from a control experiment. Replace CONDNAME and REPNAME with appropriate labels to match a signal experiment (i.e. to tell ChExMix which condition/replicate this is a control for). If you leave out a REPNAME, this file will be used as a control for all replicates of CONDNAME.  
   * --__format__ \<SAM/BAM/BED/IDX\>: Format of data files. All files must be the same format if specifying experiments on the command line. Supported formats are SAM/BAM, BED, and IDX index files.
  
-Instead of using the above options to specify each and every ChIP-seq data file on the command-line, you can instead use a design file:
+Instead of using the above options to specify each and every ChIP-exo data file on the command-line, you can instead use a design file:
  
   * --__design__ \<file\>: A file that specifies the data files and their condition/replicate relationships. See [here](http://lugh.bmb.psu.edu/software/multigps/example.design) for an example design file. The file should be formatted to contain the following pieces of information for each data file, in this order and tab-separated:
   
