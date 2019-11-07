@@ -271,24 +271,6 @@ public class ChExAlign {
 			Pair<double[], double[]> ctrlCompositeTags = multialign.makeControlCompositeCounts();
 			xlFinder.executeOnAlignedCompoiste(multialign.getAlignedLength(), spts, perPointTags.car(), perPointTags.cdr(),ctrlCompositeTags.car(), ctrlCompositeTags.cdr());
 		}
-		
-		/**
-		// this is not working
-		System.out.println(root.getNodeID()+"\t"+root.getLeafList().toString()+"\t"+root.getNumMembers());
-		System.out.println("right");
-		System.out.println(root.getRight().getNodeID()+"\t"+root.getLeafID());
-		System.out.println(root.getRight().getLeafList().toString());
-		System.out.println("right of right");
-		System.out.println(root.getRight().getRight().getLeafList().toString());
-		System.out.println("left");
-		System.out.println(root.getLeft().getLeafList().toString());
-		System.out.println("left of left");
-		System.out.println(root.getLeft().getLeft().getLeafList().toString());
-		System.out.println("right of left");
-		System.out.println(root.getLeft().getRight().getLeafList().toString());
-		System.out.println("right");
-		System.out.println(root.getRight().getLeafList().toString());
-		**/
 	
 	}
 	
@@ -433,12 +415,13 @@ public class ChExAlign {
 	
 	
 	/**
-	 * Main driver method
+	 * Main driver method for ChExAlign
 	 * @param args
 	 * @throws Exception 
 	 */
 	public static void main(String[] args){
-		
+		System.setProperty("java.awt.headless", "true");
+		System.err.println("ChExMix version "+AlignmentConfig.version+"\n\n");
 		GenomeConfig gcon = new GenomeConfig(args);
 		ExptConfig econ = new ExptConfig(gcon.getGenome(), args);						
 		AlignmentConfig config = new AlignmentConfig(gcon, args);			
@@ -446,7 +429,7 @@ public class ChExAlign {
 			econ.setPerBaseReadFiltering(false);
 		econ.setLoadRead2(false);
 		
-		if(args.length==0){
+		if(args.length==0 || config.helpWanted()){
 			System.err.println("ProgressiveProfileAlignment:"+
 					"\t--spoints <stranded point file> OR --points <point file>"+
 					"\t--cwin <window around points>"+
@@ -469,5 +452,49 @@ public class ChExAlign {
 					
 			manager.close();
 		}
+	}
+	
+	/**
+	 * returns a string describing the arguments for the public version of ChExMix. 
+	 * @return String
+	 */
+	public static String getChExAlignArgsList(){
+		return(new String("" +
+				"Copyright (C) Naomi Yamada 2019\n" +
+				"Further documentation: <https://github.com/seqcode/chexalign>\n" +
+				"\n" +
+				"ChExAlign comes with ABSOLUTELY NO WARRANTY.  This is free software, and you\n"+
+				"are welcome to redistribute it under certain conditions.  See the MIT license \n"+
+				"for details.\n"+
+				"\n OPTIONS:\n" +
+				" General:\n"+
+				"\t--out <output file prefix>\n" +
+				" Genome:\n" +
+				"\t--geninfo <genome info file>\n" +
+				" Loading Data:\n" +
+				"\t--expt <file name> AND --format <SAM/BED/IDX>\n" +
+				"\t--ctrl <file name (optional argument. must be same format as expt files)>\n" +
+				"\t--design <experiment design file name to use instead of --expt and --ctrl; see website for format>\n"+
+				"\t--fixedpb <fixed per base limit (default: estimated from background model)>\n" +
+				"\t--poissongausspb <filter per base using a Poisson threshold parameterized by a local Gaussian sliding window>\n" +
+				"\t--nonunique [flag to use non-unique reads]\n" +
+				"\t--mappability <fraction of the genome that is mappable for these experiments (default=0.8)>\n" +
+				"\t--nocache [flag to turn off caching of the entire set of experiments (i.e. run slower with less memory)]\n" +
+				" Scaling control vs signal counts:\n" +
+				"\t--noscaling [flag to turn off auto estimation of signal vs control scaling factor]\n" +
+				"\t--medianscale [flag to use scaling by median ratio (default = scaling by NCIS)]\n" +
+				"\t--regressionscale [flag to use scaling by regression (default = scaling by NCIS)]\n" +
+				"\t--sesscale [flag to use scaling by SES (default = scaling by NCIS)]\n" +
+				"\t--fixedscaling <multiply control counts by total tag count ratio and then by this factor (default: NCIS)>\n" +
+				"\t--scalewin <window size for scaling procedure (default=10000)>\n" +
+				"\t--plotscaling [flag to plot diagnostic information for the chosen scaling method]\n" +
+				" Running ChExAlign:\n" +
+				"\t--cpoints <file name>:" +
+				"\t--cwin <>:" +
+				" Alining Crosslinking Patterns:\n" +
+				" Quantifying Crosslinking Events:\n" +
+				"\t--r <max. model update rounds (default=3)>\n" +
+
+				""));
 	}
 }
