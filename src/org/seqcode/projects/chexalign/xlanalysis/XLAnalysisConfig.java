@@ -36,7 +36,7 @@ public class XLAnalysisConfig {
 	public static String version = "0.1";
 	protected GenomeConfig gconfig;
 	protected Genome gen=null;
-	protected String outName="chexmix", outBase="chexmix";
+	protected String outName="chexmix", outBase="chexalign";
 	protected File outDir=null, interDir=null, imagesDir=null;
 	protected boolean printHelp=false;
 	protected String model=null; //Filename containing existing model
@@ -44,10 +44,10 @@ public class XLAnalysisConfig {
 	protected List<StrandedPoint> compositePoints = new ArrayList<StrandedPoint>(); //Centers of the composite plots
 	protected int compositeWinSize=1000; //Width of the composite plot
 	protected int XLDistribOffset=6; //exonuclease head-space
-	protected double XLDistribSigma=1.5; //gaussian distrib sigma
+	protected double XLDistribSigma=6; //gaussian distrib sigma
 	protected int XLComponentSpacing = 5; //Inital number of bp between XL Components
 	protected int minModelUpdateRounds=3; //Minimum number of outer EM training rounds
-	protected int maxModelUpdateRounds=10; //Maximum number of outer EM training rounds
+	protected int maxModelUpdateRounds=2; //Maximum number of outer EM training rounds
 	protected double modelConvergenceKL=-25; //KL-divergence threshold for convergence 
 	protected int maxThreads=1;				//Number of threads to use. Default is 1 for single processor machines. 
 	protected double alphaScalingFactor = 10.0; //Scale the alpha value by this factor relative to the noise component per-base
@@ -63,7 +63,7 @@ public class XLAnalysisConfig {
 	protected boolean writeSinglePlots=false; //Plot the individual PNG images along with the gifs
     protected List<Region> regionsToPlotML = new ArrayList<Region>(); //List of regions that will be printed during ML training (for debugging/demonstration)
     protected List<Point> scanPoints = new ArrayList<Point>(); //Centers of the scan sites in scanning applications
-	protected boolean multicondition_posprior=false; //Multiple condition positional prior
+	protected boolean multicondition_posprior=true; //Multiple condition positional prior
     protected double prob_shared_binding=0.1; //Prior probability that binding sites are shared between conditions (Constant used to build positional priors between conditions)
     protected double init_xl = 5;	//Number of XL expected in a given composite plot (Constant used for positional prior) 
     protected boolean fixed_xl_offset=true; //Estimate the XL component offset (mean)?
@@ -202,8 +202,8 @@ public class XLAnalysisConfig {
 				//Regions to print during ML training
 				if(ap.hasKey("plotregions"))
 					regionsToPlotML = RegionFileUtilities.loadRegionsFromFile(Args.parseString(args, "plotregions", null), gen, -1);
-				//Turn on multi-condition positional prior
-				multicondition_posprior = Args.parseFlags(args).contains("posprior") ? true : false;
+				//Turn off multi-condition positional prior
+				multicondition_posprior = Args.parseFlags(args).contains("noposprior") ? false : true;				
 				//Set a value for the multi-condition positional prior
 				prob_shared_binding = Args.parseDouble(args,"probshared",prob_shared_binding);
 				//Estimate the XL component offset (mean)?
@@ -333,7 +333,7 @@ public class XLAnalysisConfig {
 				"\t--spoints <center points (unstranded) of scanning analysis>\n" +
 				"Experiment Design File:\n" +
 				"\t--design <file name>\n" +
-				"ChExMix Model:" +
+				"XLAnalysis Model:" +
 				"\t--model <filename>\n" +
 				"Miscellaneous:\n" +
 				"\t--xlcompspacing <initial spacing between XL components (default="+XLComponentSpacing+")>\n" +

@@ -421,7 +421,7 @@ public class ChExAlign {
 	 */
 	public static void main(String[] args){
 		System.setProperty("java.awt.headless", "true");
-		System.err.println("ChExMix version "+AlignmentConfig.version+"\n\n");
+		System.err.println("ChExAlign version "+AlignmentConfig.version+"\n\n");
 		GenomeConfig gcon = new GenomeConfig(args);
 		ExptConfig econ = new ExptConfig(gcon.getGenome(), args);						
 		AlignmentConfig config = new AlignmentConfig(gcon, args);			
@@ -430,16 +430,7 @@ public class ChExAlign {
 		econ.setLoadRead2(false);
 		
 		if(args.length==0 || config.helpWanted()){
-			System.err.println("ProgressiveProfileAlignment:"+
-					"\t--spoints <stranded point file> OR --points <point file>"+
-					"\t--cwin <window around points>"+
-					"\t--out <output file name>"+
-					"Genome:" +
-					"\t--species <Species;Genome>\n" +
-					"\tOR\n" +
-					"\t--geninfo <genome info file> AND --seq <fasta seq directory>\n" +
-					"Experiment Design File:\n" +
-					"\t--design <file name>\n");			
+			System.err.println(ChExAlign.getChExAlignArgsList());	
 		}else{
 			
 			ExperimentManager manager = new ExperimentManager(econ);
@@ -489,11 +480,16 @@ public class ChExAlign {
 				"\t--scalewin <window size for scaling procedure (default=10000)>\n" +
 				"\t--plotscaling [flag to plot diagnostic information for the chosen scaling method]\n" +
 				" Running ChExAlign:\n" +
-				"\t--cpoints <file name>:" +
-				"\t--cwin <>:" +
+				"\t--cpoints <file name (REQUIRED. file of genomic positions to perform alignment)>\n" +
+				"\t--cwin <window size for analyzing read profiles (default=400)>\n" +
+				"\t--gap <gap open penalty (default=100)>\n" +
+				"\t--extscaling <gap extension scaling factor; increase for larger gap-extension penalty (default=0.1)>\n" +
+				"\t--sort [flag to output per region alignment by the order of genomic position input file]\n"+
 				" Alining Crosslinking Patterns:\n" +
 				" Quantifying Crosslinking Events:\n" +
 				"\t--r <max. model update rounds (default=3)>\n" +
+				"\t--xlsigma <crosslinking component sigma (default=6)\n" +
+				"\t--noposprior [flag to turn off inter-experiment positional prior (default=on)]\n" +
 
 				""));
 	}

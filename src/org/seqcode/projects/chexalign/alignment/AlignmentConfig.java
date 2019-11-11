@@ -31,7 +31,7 @@ public class AlignmentConfig {
 	protected double gapExtensionScalingFactor;	//Scaling factor to determine gap extension penalty relative to gap opening
 	protected double smoothingGaussianVariance;
 	protected boolean upgma=false;	// Use UPGMA guide tree to align
-	protected boolean gradient=true;	//Use gradient gap penalty
+	protected boolean gradient=false;	//Use gradient gap penalty
 	protected boolean smooth=false; 	//Smooth profiles before alignment
 	protected boolean normalizeBySignal =false;	//Normalize profile based on signal proportions calculated by NCIS scaling ratio
 	protected boolean ihstrans =false; // Transform data using inverse hyperbolic sine function
@@ -43,8 +43,9 @@ public class AlignmentConfig {
 	
 	
 	/** Similarity metrics for NeedlemanWunsch Alignment    **/
+	public boolean pearson = true;		// Pearson correlation (default)
 	public boolean linear = false;
-	public boolean euclidean = true; 	// 1. Minkowski family (default)
+	public boolean euclidean = false; 	// 1. Minkowski family
 	public boolean sorensen = false; 	// 2. L1 family
 	public boolean soergel = false;		// 2. L1 family
 	public boolean lorentzian = false;	// 2. L1 family
@@ -54,8 +55,6 @@ public class AlignmentConfig {
 	public boolean divergence = false;	// 4. Squared L2 family or Chi-squre family
 	public boolean clark = false;		// 4. Squared L2 family or Chi-squre family
 	public boolean kl = false;			// 5. Shannon's entropy family
-	
-	public boolean pearson = false;		// Pearson correlation
 	
 	public boolean sum_similarity = false;		// Calculate single similarity score across expt rather than sum of individual experiments
 	public boolean debugMode=false;		// print extra outputs for debugging 
@@ -84,7 +83,7 @@ public class AlignmentConfig {
 		}else{
 				
 			// parse command line arguments
-			w = Args.parseInteger(args, "cwin", 201);
+			w = Args.parseInteger(args, "cwin", 401);
 			// convert to odd number to avoid 1 bp off
 			if (w % 2==0){ w+=1;}
 			gap_penalty = Args.parseDouble(args, "gap", 5.0);
@@ -104,8 +103,8 @@ public class AlignmentConfig {
 			smoothingGaussianVariance = Args.parseDouble(args, "gausssmoothparam", 1.0);
 			//Use UPGMA guide tree for multiple alignment
 			upgma = Args.parseFlags(args).contains("upgma") ? true : false;
-			// Use constant gap penalty
-			gradient = Args.parseFlags(args).contains("constantgap") ? false : true;
+			// Use gradient gap penalty
+			gradient = Args.parseFlags(args).contains("gradientgap") ? true : false;
 			// Smooth profiles before alignment
 			smooth = Args.parseFlags(args).contains("smooth") ? true : false;
 			// Normalize tags by maximum values within windows
@@ -114,8 +113,8 @@ public class AlignmentConfig {
 			ihstrans = Args.parseFlags(args).contains("ihstrans")? true : false;
 			// Print extra outputs for debugging
 			debugMode = Args.parseFlags(args).contains("debug") ? true : false;
-			// Sort tag profile based on the order of input region order, this option will turn off  sorting
-			sortforprint = Args.parseFlags(args).contains("nosort") ? false : true;
+			// Sort tag profile based on the order of input region
+			sortforprint = Args.parseFlags(args).contains("sort") ? true : false;
 			
 			spts = new ArrayList<StrandedPoint>();
 			if (ap.hasKey("cpoints")){
@@ -131,22 +130,28 @@ public class AlignmentConfig {
 			filename = Args.parseString(args, "out", "out");
 			
 			/** Similarity metrics for NeedlemanWunsch Alignment    **/
-			linear = Args.parseFlags(args).contains("linear") ? true : false;
-			// 2. L1 family
-			sorensen = Args.parseFlags(args).contains("sorensen") ? true : false;
-			soergel = Args.parseFlags(args).contains("soergel") ? true : false;
-			lorentzian = Args.parseFlags(args).contains("lorentzian") ? true : false;
-			// 3. Inner product family
-			cosine = Args.parseFlags(args).contains("cosine") ? true : false;
-			pce = Args.parseFlags(args).contains("pce") ? true : false;
-			// 4. Squared L2 family or Chi-squre family
-			chisquare = Args.parseFlags(args).contains("chisquare") ? true : false;
-			divergence = Args.parseFlags(args).contains("divergence") ? true : false;
-			clark = Args.parseFlags(args).contains("clark") ? true : false;
-			// 5. Shannon's entropy family
-			kl = Args.parseFlags(args).contains("kl") ? true : false;
-			// Pearson correlation coefficient
-			pearson = Args.parseFlags(args).contains("pearson") ? true : false;
+			String distMetric = Args.parseString(args,"dist", null);
+			if (distMetric !=null){
+				// Pearson correlation coefficient
+				if (distMetric=="pearson"){pearson=true;}
+				// Minkowski family
+				else if (distMetric =="euclidean"){euclidean=true;}
+				// L1 family
+				else if (distMetric=="sorensen"){sorensen=true;}
+				else if (distMetric=="soergel"){soergel=true;}
+				else if (distMetric=="lorentzian"){lorentzian=true;}
+				// Inner product family
+				else if (distMetric=="cosine"){cosine=true;}
+				else if (distMetric=="pce"){pce=true;}
+				// Squared L2 family or Chi-squre family
+				else if (distMetric=="chisquare"){chisquare=true;}
+				else if (distMetric=="divergence"){divergence=true;}
+				else if (distMetric=="clark"){clark=true;}
+				// Shannon's entropy family
+				else if (distMetric=="kl"){kl=true;}
+				// Linear combination of variables
+				else if (distMetric =="linear"){linear=true;}
+			}
 			
 			//calculate similarity score and sum across experiments, rather than calculate a single score across experiments
 			sum_similarity = Args.parseFlags(args).contains("sumsimilarity") ? true : false;
