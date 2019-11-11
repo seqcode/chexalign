@@ -83,19 +83,20 @@ Instead of using the above options to specify each and every ChIP-exo data file 
  
 __Running ChExAlign__:
 
-  * --__cpoints__ \<file\>: File of genomic positions. See [here]() for an example point file.
-  * --cwin \<int\>:
+  * --__cpoints__ \<file\>: File of genomic positions to perform alignment.
+  * --cwin \<int\>: Window size for analyzing read profiles (default=400).
   
 __Alining Crosslinking Patterns__:
 
-  * --gap \<value\>:
-  * --dist \<///\>:
+  * --gap \<value\>: Gap open penalty (default=100).
+  * --extscaling \<value\>: Gap extension scaling factor (default=0.1). Increasing this parameter results in greater gap extension penalty.
+  * --sort: Flag to output per region alignment by the order of genomic position input file (default=off).
 
 __Quantifying Crosslinking Events__:
 
   * --r \<int\>: Max. model update rounds (default=3).
-  * --posprior : Flag
-  * --xlsigma \<value\>:
+  * --noposprior Flag to turn off inter-experiment positional prior (default=on).
+  * --xlsigma \<value\>: Crosslinking component sigma (default=6)
 
 Example
 --------------
