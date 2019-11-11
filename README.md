@@ -88,14 +88,14 @@ __Running ChExAlign__:
   
 __Alining Crosslinking Patterns__:
 
-  * --gap \<value\>: Gap open penalty. Default=100.
+  * --gap \<value\>: Gap open penalty (default=100).
   * --extscaling \<value\>: Gap extension scaling factor (default=0.1). Increasing this parameter results in greater gap extension penalty.
-  * --sort: Flag to output per region alignment by the order of genomic position input file.
+  * --sort: Flag to output per region alignment by the order of genomic position input file (default=off).
 
 __Quantifying Crosslinking Events__:
 
   * --r \<int\>: Max. model update rounds (default=3).
-  * --noposprior Flag to turn off inter-experiment positional prior (default=on)
+  * --noposprior Flag to turn off inter-experiment positional prior (default=on).
   * --xlsigma \<value\>: Crosslinking component sigma (default=6)
 
 Example
