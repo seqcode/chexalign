@@ -82,48 +82,6 @@ public class SimilarityScore {
 				System.out.print(nCrickB[e][bIndex]+",");
 		}
 		
-		/**	
-		double score = 0.0;
-		for (int e=0; e< numCond; e++){
-			double dist=0.0;
-			// score distributions indicate that not subtracting penalties works better for the following distance metrics
-			if (config.sorensen||config.soergel||config.cosine||config.pce||config.divergence||config.clark){
-				if (config.sorensen)
-					dist=sorensen(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				if (config.soergel)
-					dist=soergel(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				if (config.cosine)
-					dist=cosine(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				if (config.pce)
-					dist=PCE(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				if (config.divergence)
-					dist=divergence(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				if (config.clark)
-					dist=clark(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				score += (1 - dist);
-				if (config.debugMode)
-					System.out.print("score: "+score+",");
-			}else{			
-				if (config.linear)
-					dist=linear(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				else if (config.lorentzian)
-					dist=lorentzian(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				else if (config.pearson)
-					dist=pearson(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				else if (config.chisquare)
-					dist=chiSquare(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				else if (config.kl)
-					dist=KL(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-				else
-					dist=euclidean(nWatsonA[e][aIndex], nWatsonB[e][bIndex], nCrickA[e][aIndex], nCrickB[e][bIndex]);
-
-				double penalty = Math.abs(nWatsonA[e][aIndex]-nWatsonB[e][bIndex]) + Math.abs(nCrickA[e][aIndex]-nCrickB[e][bIndex]);
-				score += (1 - dist - penalty);
-				if (config.debugMode)
-					System.out.print("dist: "+dist+",penalty: "+penalty+",");
-			}
-		}
-	**/
 		return score;
 	}
 	

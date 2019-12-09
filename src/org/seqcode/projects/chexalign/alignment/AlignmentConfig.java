@@ -132,25 +132,23 @@ public class AlignmentConfig {
 			/** Similarity metrics for NeedlemanWunsch Alignment    **/
 			String distMetric = Args.parseString(args,"dist", null);
 			if (distMetric !=null){
-				// Pearson correlation coefficient
-				if (distMetric=="pearson"){pearson=true;}
 				// Minkowski family
-				else if (distMetric =="euclidean"){euclidean=true;}
+				if (distMetric =="euclidean"){euclidean=true;pearson=false;}
 				// L1 family
-				else if (distMetric=="sorensen"){sorensen=true;}
-				else if (distMetric=="soergel"){soergel=true;}
-				else if (distMetric=="lorentzian"){lorentzian=true;}
+				else if (distMetric=="sorensen"){sorensen=true;pearson=false;}
+				else if (distMetric=="soergel"){soergel=true;pearson=false;}
+				else if (distMetric=="lorentzian"){lorentzian=true;pearson=false;}
 				// Inner product family
-				else if (distMetric=="cosine"){cosine=true;}
-				else if (distMetric=="pce"){pce=true;}
+				else if (distMetric=="cosine"){cosine=true;pearson=false;}
+				else if (distMetric=="pce"){pce=true;pearson=false;}
 				// Squared L2 family or Chi-squre family
-				else if (distMetric=="chisquare"){chisquare=true;}
-				else if (distMetric=="divergence"){divergence=true;}
-				else if (distMetric=="clark"){clark=true;}
+				else if (distMetric=="chisquare"){chisquare=true;pearson=false;}
+				else if (distMetric=="divergence"){divergence=true;pearson=false;}
+				else if (distMetric=="clark"){clark=true;pearson=false;}
 				// Shannon's entropy family
-				else if (distMetric=="kl"){kl=true;}
+				else if (distMetric=="kl"){kl=true;pearson=false;}
 				// Linear combination of variables
-				else if (distMetric =="linear"){linear=true;}
+				else if (distMetric =="linear"){linear=true;pearson=false;}
 			}
 			
 			//calculate similarity score and sum across experiments, rather than calculate a single score across experiments

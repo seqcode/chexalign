@@ -1,5 +1,6 @@
 package org.seqcode.projects.chexalign;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class ChExAlign {
 		if (manager.getReplicates().get(0).hasControl())
 			controlComposite = new CompositeTagDistribution(spts, eMan, win, false);
 		for(ExperimentCondition cond : eMan.getConditions()){
-			String compositeFileName = this.filename+"_composite."+cond.getName()+".txt";
+			String compositeFileName = xlcon.getOutputIntermediateDir()+File.separator+this.filename+"_beforeAlignment_composite."+cond.getName()+".txt";
 			signalComposite.printProbsToFile(cond, compositeFileName);
 		}	
 		nodes = new TreeNode[numPoints];
@@ -109,12 +110,14 @@ public class ChExAlign {
 			}
 		}
 		
+		/**
 		System.out.println("raw similarity scores");
 		for (int i=0; i < numPoints; i++){
 			for (int j=i+1; j< numPoints; j++)
 				System.out.print(pairwiseSimilarities[i][j]+",");
 			System.out.println();
 		}
+		**/
 		
 		// Normalize similarity matrices
 		for (int i = 0; i <numPoints;i++){
@@ -123,12 +126,14 @@ public class ChExAlign {
 				pairwiseSimilarities[j][i] = (pairwiseSimilarities[j][i]-minScore)/(maxScore-minScore);
 		}}		
 		
+		/**
 		System.out.println("normalized similarity scores");
 		for (int i=0; i < numPoints; i++){
 			for (int j=i+1; j< numPoints; j++)
 				System.out.print(pairwiseSimilarities[i][j]+",");
 			System.out.println();
 		}	
+		**/
 		
 		//Convert similarities to distances		
 		double generalMean=0; double count=0;
@@ -142,6 +147,7 @@ public class ChExAlign {
 			}
 		}
 		
+		/**
 		System.out.println("normalized distance");
 		for (int i=0; i < numPoints; i++){
 			for (int j=i+1; j< numPoints; j++)
@@ -150,7 +156,8 @@ public class ChExAlign {
 		}
 		
 		generalMean/=count;	
-		System.out.println(generalMean);		
+		System.out.println(generalMean);	
+		**/	
 	}
 	
 	/**
@@ -179,7 +186,7 @@ public class ChExAlign {
 							minDist = pairwiseDist[i][j];
 							minNodeA = i; minNodeB=j;
 						}}}}	
-			System.out.println("minimum nodes are "+minNodeA+" , "+minNodeB);
+			//System.out.println("minimum nodes are "+minNodeA+" , "+minNodeB);
 			
 			//Step 2: put minNodes A&B into new Node
 			double h = minDist/2.0;
@@ -257,13 +264,13 @@ public class ChExAlign {
 		System.out.println("tree building complete");
 		
 		// print alignment results
-		multialign.printOriginalRegionsToFile(filename, win, config.useSortForPrint());
-		multialign.printAlignedRegionsToFile(filename, config.useSortForPrint());
+		multialign.printOriginalRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, win, config.useSortForPrint());
+		multialign.printAlignedRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
 		
-		MultipleAlignment.printOriginalTagsToFile(manager, signalComposite, filename);
-		multialign.printAlignedTagsToFile(manager, filename, config.useSortForPrint());
+		MultipleAlignment.printOriginalTagsToFile(manager, signalComposite, xlconfig.getOutputIntermediateDir()+File.separator+this.filename);
+		multialign.printAlignedTagsToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
 		
-		multialign.printAlignedCompositeToFile(manager, filename);
+		multialign.printAlignedCompositeToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename);
 		
 		if (config.doXLAnalysis()){
 			//perform cross-linking analysis
@@ -278,10 +285,10 @@ public class ChExAlign {
 	public void updateDistanceUsingUPGMA(int j, int minNodeA, int minNodeB){
 		double aMem = nodes[minNodeA].getNumMembers();
 		double bMem = nodes[minNodeB].getNumMembers();
-		System.out.println("pairwiseDist[minNodeA][j] "+pairwiseDist[minNodeA][j]+", aMem "+aMem+", pairwiseDist[minNodeB][j] "+pairwiseDist[minNodeB][j]+" ,bMem "+bMem);
+		//System.out.println("pairwiseDist[minNodeA][j] "+pairwiseDist[minNodeA][j]+", aMem "+aMem+", pairwiseDist[minNodeB][j] "+pairwiseDist[minNodeB][j]+" ,bMem "+bMem);
 		pairwiseDist[minNodeA][j] = (pairwiseDist[minNodeA][j]*aMem + pairwiseDist[minNodeB][j]*bMem)/(aMem +bMem);
 		pairwiseDist[j][minNodeA] = (pairwiseDist[j][minNodeA]*aMem + pairwiseDist[j][minNodeB]*bMem)/(aMem +bMem);	
-		System.out.println("new distance for index "+minNodeA+" and "+j+ "is : "+pairwiseDist[minNodeA][j]);		
+		//System.out.println("new distance for index "+minNodeA+" and "+j+ "is : "+pairwiseDist[minNodeA][j]);		
 	}
 	
 	// Calculate distance by aligning a new profile to the rest
@@ -292,7 +299,7 @@ public class ChExAlign {
 		}else{
 			double minNumLeaves = Math.min(leaflist.size(), nodes[j].getLeafList().size());
 			// Gradient gap penality
-			System.out.println("currGapPenalty is: "+computeGapPenalty(minNumLeaves));
+			//System.out.println("currGapPenalty is: "+computeGapPenalty(minNumLeaves));
 			nw = NeedlemanWunschAffine.AlignPair(manager, config, 
 					alignmentRec[minNodeA].Alignment2Profile(), alignmentRec[j].Alignment2Profile(), computeGapPenalty(minNumLeaves), gapScaling);
 		}
@@ -301,7 +308,7 @@ public class ChExAlign {
 		double distance = 1-nSimilarity;
 		pairwiseDist[minNodeA][j] = distance;
 		pairwiseDist[j][minNodeA] = distance;
-		System.out.println("new distance for index "+minNodeA+" and "+j+ "is : "+pairwiseDist[minNodeA][j]);		
+		//System.out.println("new distance for index "+minNodeA+" and "+j+ "is : "+pairwiseDist[minNodeA][j]);		
 	}
 	
 	public double computeGapPenalty(double minNumLeaves){
