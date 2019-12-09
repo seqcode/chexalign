@@ -95,8 +95,8 @@ __Alining Crosslinking Patterns__:
 __Quantifying Crosslinking Events__:
 
   * --r \<int\>: Max. model update rounds (default=3).
-  * --noposprior Flag to turn off inter-experiment positional prior (default=on).
   * --xlsigma \<value\>: Crosslinking component sigma (default=6)
+  * --noposprior: Flag to turn off inter-experiment positional prior (default=on).
 
 Example
 --------------
