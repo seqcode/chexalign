@@ -271,7 +271,7 @@ public class XLAnalysisConfig {
 	/**
 	 * Make some output directories used by ChExMix
 	 */
-	public void makeChExMixOutputDirs(boolean makeInterAndImageDirs){
+	public void makeXLAnalysisOutputDirs(boolean makeInterAndImageDirs){
 		//Test if output directory already exists. If it does,  recursively delete contents
 		outDir =  new File(outName);
 		if(outDir.exists())

@@ -442,7 +442,8 @@ public class ChExAlign {
 			
 			ExperimentManager manager = new ExperimentManager(econ);
 			
-			XLAnalysisConfig ccon = new XLAnalysisConfig(gcon, args);					
+			XLAnalysisConfig ccon = new XLAnalysisConfig(gcon, args);	
+			ccon.makeXLAnalysisOutputDirs(true);
 			ChExAlign nodes = new ChExAlign(config,ccon, gcon, econ, manager);	
 			
 //			Tree nodes = new Tree(config,gcon, econ, manager);

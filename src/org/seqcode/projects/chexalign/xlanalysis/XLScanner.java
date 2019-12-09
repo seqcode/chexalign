@@ -27,7 +27,7 @@ public class XLScanner {
 		gconfig = gcon;
 		econfig = econ;
 		cconfig = ccon;
-		cconfig.makeChExMixOutputDirs(true);
+		cconfig.makeXLAnalysisOutputDirs(true);
 		manager = new ExperimentManager(econfig);
 	}
 	
