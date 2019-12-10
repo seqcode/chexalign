@@ -84,6 +84,9 @@ public class ChExAlign {
 	}
 	
 	public void alignAllPairwise(){
+		
+		System.out.println("\n============================ Profile alignment ============================");
+		
 		// Initialize matrices
 		double[][] pairwiseSimilarities = new double[numPoints][numPoints];
 		pairwiseDist = new double[numPoints][numPoints];
@@ -164,8 +167,6 @@ public class ChExAlign {
      * Build UPGMA tree based on pairwise distances/similarities 
      */	
 	public void buildTree(){	
-				
-		System.out.println("\n============================ Profile alignment ============================");
 		
 		// Keep track of which node is active
 		boolean[] active = new boolean[numPoints];
