@@ -20,22 +20,6 @@ public class AlignedCompositeTagDistribution extends CompositeTagDistribution {
 				for (int w=0; w < win; w++)
 					composite[c][w]+=perPointCounts[p][c][w];
 		
-		//test start//
-		for (int c=0; c < numConditions; c++){
-			if (ctrlComposite!=null){
-				System.out.println("scaled control composite");
-				for (int w=0; w < win; w++)
-					System.out.print(ctrlComposite[w]*exptMan.getIndexedCondition(c).getPooledSampleControlScaling()+",");
-				System.out.println();
-			}
-		
-			System.out.println("before subtracting");
-			for (int w=0; w < win; w++)
-				System.out.print(composite[c][w]+",");
-			System.out.println();
-		}// test end
-		
-		
 		if (ctrlComposite!=null){
 			for (int c=0; c < numConditions; c++){
 				double scaling = exptMan.getIndexedCondition(c).getPooledSampleControlScaling();
@@ -43,16 +27,6 @@ public class AlignedCompositeTagDistribution extends CompositeTagDistribution {
 					double currVal=composite[c][w]-ctrlComposite[w]*scaling;
 					composite[c][w] = currVal>0? currVal: 0;
 				}}}
-		
-		//test start
-		for (int c=0; c < numConditions; c++){
-			System.out.println("after subtracting");
-			for (int w=0; w < win; w++)
-				System.out.print(composite[c][w]+",");
-			System.out.println();
-			
-		}
-		//test end
 		
 		return composite;	
 	}
