@@ -5,6 +5,7 @@ ChExAlign is a computational framework that aligns ChIP-exo crosslinking pattern
 
 Citation:
 --------------
+N Yamada, MJ Rossi, N Farrell, BF Pugh, S Mahony .“Alignment and quantification of ChIP-exo crosslinking patterns reveal the spatial organization of protein-DNA complexes”. bioRxiv. [doi:10.1101/868604](https://doi.org/10.1101/868604).
 
 Downloading Executables
 --------------
