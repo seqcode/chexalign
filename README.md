@@ -106,7 +106,7 @@ This example runs ChExAlign v0.1 on ribosomal protein gene (RPG) datasets (NCBI 
 Let’s demonstrate how ChExAlign works. Note that this example only uses the top 20 RPG sites to save time.
 
 ```{r, engine='sh', count_lines}
-java -Xmx8G -jar chexalign_v0.1.jar --geninfo sacCer3.info --cpoints rp-127rpgs.20.spoints --exptRap1 Rap1.bam --exptHmo1 Hmo1.bam --exptSfp1 Sfp1.bam --exptIfh1 Ifh1.bam --exptFhl1 l1.bam --ctrl Control.bam --format BAM --out chexalign-test-results --gap 200 --nosort --cwin 1000 > chexalign-test-results.out 2>&1
+java -Xmx8G -jar chexalign_v0.1.jar --geninfo sacCer3.info --cpoints rp-127rpgs.20.spoints --exptRap1 Rap1.bam --exptHmo1 Hmo1.bam --exptSfp1 Sfp1.bam --exptIfh1 Ifh1.bam --exptFhl1 Fhl1.bam --ctrl Control.bam --format BAM --out chexalign-test-results --gap 200 --nosort --cwin 1000 > chexalign-test-results.out 2>&1
 ```
 
 Expected results are named chexalign-test and can be found in the same file.
