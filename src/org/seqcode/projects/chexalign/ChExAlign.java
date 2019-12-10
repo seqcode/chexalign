@@ -165,7 +165,7 @@ public class ChExAlign {
      */	
 	public void buildTree(){	
 				
-		System.err.println("\n============================ Profile alignment ============================");
+		System.out.println("\n============================ Profile alignment ============================");
 		
 		// Keep track of which node is active
 		boolean[] active = new boolean[numPoints];
@@ -264,7 +264,7 @@ public class ChExAlign {
 		//Tree building finished, the last node (i.e. tmpNode), should be the root
 		root = tmpNode;
 		
-		System.err.println("Alignment complete");
+		System.out.println("Alignment complete");
 				
 		// print alignment results
 		multialign.printOriginalRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, win, config.useSortForPrint());
@@ -276,7 +276,7 @@ public class ChExAlign {
 		multialign.printAlignedCompositeToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename);
 		
 		if (config.doXLAnalysis()){
-			System.err.println("\n============================ Cross-linking analysis ============================");
+			System.out.println("\n============================ Cross-linking analysis ============================");
 			//perform cross-linking analysis
 			Pair<double[][][], double[][][]> perPointTags = multialign.makePerPointCountsFromTagProfiles();
 			Pair<double[], double[]> ctrlCompositeTags = multialign.makeControlCompositeCounts();
@@ -432,7 +432,7 @@ public class ChExAlign {
 	 */
 	public static void main(String[] args){
 		System.setProperty("java.awt.headless", "true");
-		System.err.println("ChExAlign version "+AlignmentConfig.version+"\n\n");
+		System.out.println("ChExAlign version "+AlignmentConfig.version+"\n\n");
 		GenomeConfig gcon = new GenomeConfig(args);
 		ExptConfig econ = new ExptConfig(gcon.getGenome(), args);						
 		AlignmentConfig config = new AlignmentConfig(gcon, args);			
