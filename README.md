@@ -9,7 +9,7 @@ N Yamada, MJ Rossi, N Farrell, BF Pugh, S Mahony .“Alignment and quantificatio
 
 Downloading Executables
 --------------
-Executable will be available
+  * ChExAlign version 0.1 (2019-12-10): [JAR](http://lugh.bmb.psu.edu/software/chexalign/chexalign_v0.1.jar)
 
 Building from Source
 --------------
