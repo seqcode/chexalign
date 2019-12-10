@@ -163,7 +163,10 @@ public class ChExAlign {
 	/**
      * Build UPGMA tree based on pairwise distances/similarities 
      */	
-	public void buildTree(){			
+	public void buildTree(){	
+				
+		System.err.println("\n============================ Profile alignment ============================");
+		
 		// Keep track of which node is active
 		boolean[] active = new boolean[numPoints];
 		//Put all profiles to TreeNode
@@ -261,8 +264,8 @@ public class ChExAlign {
 		//Tree building finished, the last node (i.e. tmpNode), should be the root
 		root = tmpNode;
 		
-		System.out.println("tree building complete");
-		
+		System.err.println("Alignment complete");
+				
 		// print alignment results
 		multialign.printOriginalRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, win, config.useSortForPrint());
 		multialign.printAlignedRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
@@ -273,6 +276,7 @@ public class ChExAlign {
 		multialign.printAlignedCompositeToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename);
 		
 		if (config.doXLAnalysis()){
+			System.err.println("\n============================ Cross-linking analysis ============================");
 			//perform cross-linking analysis
 			Pair<double[][][], double[][][]> perPointTags = multialign.makePerPointCountsFromTagProfiles();
 			Pair<double[], double[]> ctrlCompositeTags = multialign.makeControlCompositeCounts();

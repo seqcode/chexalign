@@ -240,7 +240,7 @@ public class CompositeModelMixtureMultiCond {
     		double[] parameters = fitter.fit();;
     		double newOffset = parameters[1];
     		double newSigma = parameters[2];
-    		System.out.println("CSGaussianFit:\t"+newOffset+"\t"+newSigma);
+    //		System.out.println("CSGaussianFit:\t"+newOffset+"\t"+newSigma);
     		CSdistrib.loadGaussianDistrib(newOffset, newSigma, -newOffset, newSigma); //Symmetric CS component
     		double[] newCSModelW = CSdistrib.getWatsonProbabilities();
     		double[] newCSModelC = CSdistrib.getCrickProbabilities();
@@ -289,7 +289,7 @@ public class CompositeModelMixtureMultiCond {
     						newSigmaW = Math.sqrt(sumDiffW/totW);
     					if(sumDiffC>0)
     						newSigmaC = Math.sqrt(sumDiffC/totC);
-    					System.out.println("XLGaussianFit:\tOffset:"+config.getXLDistribOffset()+"\tSigmaW:"+newSigmaW+"\tSigmaC:"+newSigmaC);
+   // 					System.out.println("XLGaussianFit:\tOffset:"+config.getXLDistribOffset()+"\tSigmaW:"+newSigmaW+"\tSigmaC:"+newSigmaC);
     					XLdistrib.loadGaussianDistrib(-config.getXLDistribOffset(), newSigmaW, config.getXLDistribOffset(), newSigmaC);
     				}else{
     					
@@ -301,7 +301,7 @@ public class CompositeModelMixtureMultiCond {
     					parameters = fitter.fit();;
     					newOffset = parameters[1];
     					newSigma = parameters[2];
-    					System.out.println("XLGaussianFit:\tOffset:"+newOffset+"\tSigma:"+newSigma);
+    //					System.out.println("XLGaussianFit:\tOffset:"+newOffset+"\tSigma:"+newSigma);
     					XLdistrib.loadGaussianDistrib(newOffset, newSigma, -newOffset, newSigma); //symmetric
     										
     					
