@@ -101,15 +101,17 @@ __Quantifying Crosslinking Events__:
 
 Example
 --------------
-This example runs ChExAlign v0.1 on ribosomal protein gene (RPG) datasets (NCBI Sequence Read Archive under accession number SRP041518) presented in Figure 1 from the paper. The ChIP-exo data include bam files for Rap1, Hmo1, Sfp1, Ifh1, Fhl1, and control experiment . The version of ChExAlign and all files required to run this analysis and expected results are in this file: [chexalign-yeast-example.tar.gz](http://lugh.bmb.psu.edu/software/chexalign/examples/chexalign-yeast-example.tar.gz)
+This example runs ChExAlign v0.1 on ribosomal protein gene (RPG) datasets (NCBI Sequence Read Archive under accession number SRP041518) presented in Figure 1 from the paper. The ChIP-exo data include bam files for Rap1, Hmo1, Sfp1, Ifh1, Fhl1, and control experiment. The version of ChExAlign and all files required to run this analysis are in this file: [chexalign-yeast-example.tar.gz](http://lugh.bmb.psu.edu/software/chexalign/examples/chexalign-yeast-example.tar.gz)
 
 Let’s demonstrate how ChExAlign works. Note that this example only uses the top 20 RPG sites to save time.
 
 ```{r, engine='sh', count_lines}
-java -Xmx8G -jar chexalign_v0.1.jar --geninfo sacCer3.info --cpoints rp-127rpgs.20.spoints --exptRap1 Rap1.bam --exptHmo1 Hmo1.bam --exptSfp1 Sfp1.bam --exptIfh1 Ifh1.bam --exptFhl1 l1.bam --format BAM --out chexalign-test --gap 200 --nosort --cwin 1000 > chexalign-test.out 2>&1
+java -Xmx8G -jar chexalign_v0.1.jar --geninfo sacCer3.info --cpoints rp-127rpgs.20.spoints --exptRap1 Rap1.bam --exptHmo1 Hmo1.bam --exptSfp1 Sfp1.bam --exptIfh1 Ifh1.bam --exptFhl1 l1.bam --format BAM --out chexalign-test-results --gap 200 --nosort --cwin 1000 > chexalign-test-results.out 2>&1
 ```
 
-You can run python scripts to visualize your results. Run this to make an alignment figure.
+Expected results are named chexalign-test and can be found in the same file.
+
+You can run the following python scripts to visualize your results. Run this to make an alignment figure.
 
 ```{r, engine='sh', count_lines}
 python plotStrandSeparateCompositeMultiExpt.py chexalign-test/chexalign-test_composite chexalign-test_composite 500 100 normalize
