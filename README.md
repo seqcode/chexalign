@@ -84,7 +84,7 @@ Instead of using the above options to specify each and every ChIP-exo data file 
  
 __Running ChExAlign__:
 
-  * --__cpoints__ \<file\>: File of genomic positions to perform alignment.
+  * --__cpoints__ \<file\>: File of genomic positions to perform alignment. This can be genomic positions from peak results, or genomic annotations if you know that target proteins bind there.
   * --cwin \<int\>: Window size for analyzing read profiles (default=400).
   
 __Alining Crosslinking Patterns__:
