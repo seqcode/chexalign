@@ -50,7 +50,7 @@ __Specifying the Genome__:
 __Loading Data__:
 
   * --__exptCONDNAME-REPNAME__ \<file\>: Defines a file containing reads from a signal experiment. Replace CONDNAME and REPNAME with appropriate condition and replicate labels.
-  * --__ctrlCONDNAME-REPNAME__ \<file\>: Optional arguments. Defines a file containing reads from a control experiment. Replace CONDNAME and REPNAME with appropriate labels to match a signal experiment (i.e. to tell ChExMix which condition/replicate this is a control for). If you leave out a REPNAME, this file will be used as a control for all replicates of CONDNAME.  
+  * --__ctrlCONDNAME-REPNAME__ \<file\>: Optional arguments. Defines a file containing reads from a control experiment (such as mock ChIP, IgG or Input control). Replace CONDNAME and REPNAME with appropriate labels to match a signal experiment (i.e. to tell ChExAlign which condition/replicate this is a control for). If you leave out a REPNAME, this file will be used as a control for all replicates of CONDNAME.  
   * --__format__ \<SAM/BAM/BED/IDX\>: Format of data files. All files must be the same format if specifying experiments on the command line. Supported formats are SAM/BAM, BED, and IDX index files.
  
 Instead of using the above options to specify each and every ChIP-exo data file on the command-line, you can instead use a design file:
@@ -74,6 +74,8 @@ Instead of using the above options to specify each and every ChIP-exo data file 
  
  __Scaling Data__:
  
+ If you do not provide a control experiment, data scaling will not be performed. 
+ 
  * --noscaling: Flag to turn off auto estimation of signal vs control scaling factor.
  * --medianscale: Flag to use scaling by median ratio of binned tag counts. Default = scaling by NCIS.
  * --regressionscale: Flag to use scaling by regression on binned tag counts. Default = scaling by NCIS.
@@ -84,12 +86,12 @@ Instead of using the above options to specify each and every ChIP-exo data file 
  
 __Running ChExAlign__:
 
-  * --__cpoints__ \<file\>: File of genomic positions to perform alignment.
+  * --__cpoints__ \<file\>: File of genomic positions to perform alignment. This can be genomic positions from peak results, or genomic annotations if you know that target proteins bind there.
   * --cwin \<int\>: Window size for analyzing read profiles (default=400).
   
 __Alining Crosslinking Patterns__:
 
-  * --gap \<value\>: Gap open penalty (default=100).
+  * --gap \<value\>: Gap open penalty (default=100). Use 1000 for non-gapped alignment.
   * --extscaling \<value\>: Gap extension scaling factor (default=0.1). Increasing this parameter results in greater gap extension penalty.
   * --sort: Flag to output per region alignment by the order of genomic position input file (default=off).
 
@@ -101,7 +103,27 @@ __Quantifying Crosslinking Events__:
 
 Example
 --------------
+This example runs ChExAlign v0.1 on ribosomal protein gene (RPG) datasets (NCBI Sequence Read Archive under accession number SRP041518) presented in Figure 1 from the paper. The bam files include ChIP-exo data for Rap1, Hmo1, Sfp1, Ifh1, Fhl1, and control experiment. The version of ChExAlign and all files required to run this analysis are in this file: [chexalign-yeast-example.tar.gz](http://lugh.bmb.psu.edu/software/chexalign/examples/chexalign-yeast-example.tar.gz)
 
+Let’s demonstrate how ChExAlign works. Note that this example only uses the top 20 RPG sites to save time.
+
+```{r, engine='sh', count_lines}
+java -Xmx8G -jar chexalign_v0.1.jar --geninfo sacCer3.info --cpoints rp-127rpgs.20.spoints --exptRap1 Rap1.bam --exptHmo1 Hmo1.bam --exptSfp1 Sfp1.bam --exptIfh1 Ifh1.bam --exptFhl1 Fhl1.bam --ctrl Control.bam --format BAM --out chexalign-test-results --gap 200 --nosort --cwin 1000 > chexalign-test-results.out 2>&1
+```
+
+Expected results are named chexalign-test and can be found in the same file.
+
+You can run the following python scripts to visualize your results. Run this to make an alignment figure.
+
+```{r, engine='sh', count_lines}
+python plotStrandSeparateCompositeMultiExpt.py chexalign-test/chexalign-test_composite chexalign-test_composite 500 100 normalize
+```
+
+Run this to make PCA and MDS plots.
+
+```{r, engine='sh', count_lines}
+python reduce.py
+```
 
 Output files
 --------------
