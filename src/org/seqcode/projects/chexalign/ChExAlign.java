@@ -271,7 +271,7 @@ public class ChExAlign {
 		multialign.printOriginalRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, win, config.useSortForPrint());
 		multialign.printAlignedRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
 		
-		MultipleAlignment.printOriginalTagsToFile(manager, signalComposite, xlconfig.getOutputIntermediateDir()+File.separator+this.filename);
+		multialign.printOriginalTagsToFile(manager, signalComposite, xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
 		multialign.printAlignedTagsToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
 		
 		multialign.printAlignedCompositeToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename);

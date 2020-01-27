@@ -36,7 +36,7 @@ public class AlignmentConfig {
 	protected boolean normalizeBySignal =false;	//Normalize profile based on signal proportions calculated by NCIS scaling ratio
 	protected boolean ihstrans =false; // Transform data using inverse hyperbolic sine function
 	protected boolean doXLAnalysis = true;
-	protected boolean sortforprint = true; // sort tag profiles before printing
+	protected boolean sortforprint = false; // sort tag profiles before printing
 	protected boolean normalize = true;
 	protected boolean doReadFilter=false;	// Turn on per base read filter in case of highly duplicated experiment
 	protected String filename;

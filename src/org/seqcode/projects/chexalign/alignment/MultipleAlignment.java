@@ -522,7 +522,10 @@ public class MultipleAlignment {
 		}
 	}
 	
-	public static void printOriginalTagsToFile(ExperimentManager manager, CompositeTagDistribution maker, String prefix){
+	public void printOriginalTagsToFile(ExperimentManager manager, CompositeTagDistribution maker, String prefix, boolean sort){
+		//Sort by ids
+		if (sort)
+			Arrays.sort(profileAlignment);
 		for (ExperimentCondition cond : manager.getConditions()){
 			try {
 				FileWriter fout = new FileWriter(prefix+"_original."+cond.getName()+".mat");
