@@ -124,7 +124,7 @@ public class AlignToComposite {
 		alignmentRec.printOriginalRegionsToFile(filename, win, config.useSortForPrint());  // this is making errors
 		alignmentRec.printAlignedRegionsToFile(filename, config.useSortForPrint());
 						
-		MultipleAlignment.printOriginalTagsToFile(manager, signalComposite, filename);
+		alignmentRec.printOriginalTagsToFile(manager, signalComposite, filename, config.useSortForPrint());
 		alignmentRec.printAlignedTagsToFile(manager, filename, config.useSortForPrint());
 						
 		alignmentRec.printAlignedCompositeToFile(manager, filename);	
