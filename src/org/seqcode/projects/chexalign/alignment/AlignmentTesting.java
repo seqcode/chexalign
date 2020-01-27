@@ -78,7 +78,7 @@ public class AlignmentTesting {
 		multiAlign[2] = multiAlign[1].SingleProfileAddition(dist3, testTagProfile[1]);
 		orderedIndex.add(3);;
 		
-		MultipleAlignment.printOriginalTagsToFile(manager, maker, filename);
+		multiAlign[2].printOriginalTagsToFile(manager, maker, filename,config.useSortForPrint());
 		multiAlign[2].printAlignedTagsToFile(manager, filename, config.useSortForPrint());
 	}
 	
