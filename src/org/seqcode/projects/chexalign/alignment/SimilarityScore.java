@@ -61,8 +61,8 @@ public class SimilarityScore {
 				score = (double) numCond*(1 - dist); // penalty is zero if similarity is calculated using vectorized profiles
 			}
 		}
-		if (config.debugMode)
-			System.out.print("dist: "+dist+",penalty: "+penalty+","+"score: "+score+",");
+//		if (config.debugMode)
+//			System.out.print("dist: "+dist+",penalty: "+penalty+","+"score: "+score+",");
 		if (Double.isNaN(dist) || Double.isNaN(score)){
 			System.out.println();
 			System.out.println("NAN value found");
