@@ -614,7 +614,7 @@ public class NeedlemanWunschAffine {
 					
 					System.out.println("after permutation");
 					for (int x=0; x < n_watson_a[0].length; x++){
-						System.out.println(n_watson_a[0][x]+",");
+						System.out.print(n_watson_a[0][x]+",");
 					}
 					System.out.println();	
 										

@@ -86,7 +86,9 @@ public class AlignmentConfig {
 			w = Args.parseInteger(args, "cwin", 401);
 			// convert to odd number to avoid 1 bp off
 			if (w % 2==0){ w+=1;}
-			gap_penalty = Args.parseDouble(args, "gap", 5.0);
+			gap_penalty = Args.parseDouble(args, "gap", 100);
+			if (gap_penalty == -1){ gap_penalty = 1000;}
+				
 			//If gradient gap is used, specify the minimum gap penalty
 			minGapScaling = Args.parseDouble(args, "mingapscaling", 0.1);
 			if (minGapScaling > 1){
