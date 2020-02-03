@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.seqcode.data.io.RegionFileUtilities;
 import org.seqcode.deepseq.composite.CompositeTagDistribution;
@@ -607,10 +608,15 @@ public class NeedlemanWunschAffine {
 						System.out.println();
 						
 						for (int c=0; c < manager.getNumConditions(); c++){
-							Collections.shuffle(Arrays.asList(n_watson_a[c]));
-							Collections.shuffle(Arrays.asList(n_crick_a[c]));
-							Collections.shuffle(Arrays.asList(n_watson_b[c]));
-							Collections.shuffle(Arrays.asList(n_crick_b[c]));
+							n_watson_a[c]=RandomizeArray(n_watson_a[c]);
+							n_crick_a[c]=RandomizeArray(n_crick_a[c]);
+							n_watson_b[c]=RandomizeArray(n_watson_b[c]);
+							n_crick_b[c]=RandomizeArray(n_crick_b[c]);
+							
+							//Collections.shuffle(Arrays.asList(n_watson_a[c]));
+							//Collections.shuffle(Arrays.asList(n_crick_a[c]));
+							//Collections.shuffle(Arrays.asList(n_watson_b[c]));
+							//Collections.shuffle(Arrays.asList(n_crick_b[c]));
 						}	
 						
 						System.out.println("after permutation");
@@ -629,5 +635,18 @@ public class NeedlemanWunschAffine {
 			}
 			manager.close();
 		}
+	}
+	
+	public static double[] RandomizeArray(double[] array){
+		Random rgen = new Random();  // Random number generator			
+ 
+		for (int i=0; i<array.length; i++) {
+		    int randomPosition = rgen.nextInt(array.length);
+		    double temp = array[i];
+		    array[i] = array[randomPosition];
+		    array[randomPosition] = temp;
+		}
+ 
+		return array;
 	}
 }
