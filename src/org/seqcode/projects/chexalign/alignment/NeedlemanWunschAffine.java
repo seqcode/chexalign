@@ -533,6 +533,7 @@ public class NeedlemanWunschAffine {
 		ExptConfig econ = new ExptConfig(gcon.getGenome(), args);
 		econ.setPerBaseReadFiltering(false);
 		econ.setLoadRead2(false);
+
 		if(args.length==0){
 			System.err.println("NeedlemanWunschAffine:"+
 					"\t--spoints <stranded point file> OR --points <point file>"+
@@ -592,10 +593,18 @@ public class NeedlemanWunschAffine {
 					
 					if (config.debugMode){					
 						for (int c=0; c < manager.getNumConditions(); c++){
+							/***
 							n_watson_a[c]=RandomizeArray(n_watson_a[c]);
 							n_crick_a[c]=RandomizeArray(n_crick_a[c]);
 							n_watson_b[c]=RandomizeArray(n_watson_b[c]);
 							n_crick_b[c]=RandomizeArray(n_crick_b[c]);
+							***/
+							for (int l=0; l< w; l++){
+								n_watson_a[c][l] = (new Random()).nextDouble();
+								n_crick_a[c][l] = (new Random()).nextDouble();
+								n_watson_b[c][l] = (new Random()).nextDouble();
+								n_crick_b[c][l] = (new Random()).nextDouble();
+							}
 						}						
 					}						
 										
