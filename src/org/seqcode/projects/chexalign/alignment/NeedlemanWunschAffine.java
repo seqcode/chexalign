@@ -598,25 +598,29 @@ public class NeedlemanWunschAffine {
 						}
 					}
 					
-					for (int x=0; x < n_watson_a[0].length; x++){
-						System.out.print(n_watson_a[0][x]+",");
-					}
-					System.out.println();
 					
 					if (config.debugMode){
+						
+						for (int x=0; x < n_watson_a[0].length; x++){
+							System.out.print(n_watson_a[0][x]+",");
+						}
+						System.out.println();
+						
 						for (int c=0; c < manager.getNumConditions(); c++){
 							Collections.shuffle(Arrays.asList(n_watson_a[c]));
 							Collections.shuffle(Arrays.asList(n_crick_a[c]));
 							Collections.shuffle(Arrays.asList(n_watson_b[c]));
 							Collections.shuffle(Arrays.asList(n_crick_b[c]));
-						}			
+						}	
+						
+						System.out.println("after permutation");
+						for (int x=0; x < n_watson_a[0].length; x++){
+							System.out.print(n_watson_a[0][x]+",");
+						}
+						System.out.println();
+						
 					}
-					
-					System.out.println("after permutation");
-					for (int x=0; x < n_watson_a[0].length; x++){
-						System.out.print(n_watson_a[0][x]+",");
-					}
-					System.out.println();	
+						
 										
 					NeedlemanWunschAffine alignment = new NeedlemanWunschAffine(manager, config, i, j, 
 							n_watson_a, n_crick_a, gaps, n_watson_b, n_crick_b,gaps, w,w, false, gap, gapScalingFactor);	
