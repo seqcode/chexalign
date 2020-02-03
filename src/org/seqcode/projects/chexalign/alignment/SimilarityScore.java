@@ -26,7 +26,7 @@ public class SimilarityScore {
 		if (config.pearson){
 			score =(double) numCond*pearsonCC(aIndex, bIndex, nWatsonA, nWatsonB, nCrickA, nCrickB);
 			if (config.debugMode)
-				System.out.print("score: "+score+",");
+				System.out.print("score: "+pearsonCC(aIndex, bIndex, nWatsonA, nWatsonB, nCrickA, nCrickB)+",");
 		}else{
 			if (config.sorensen)
 				dist=sorensen(aIndex, bIndex, nWatsonA, nWatsonB, nCrickA, nCrickB);
