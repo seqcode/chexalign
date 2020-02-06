@@ -1,6 +1,8 @@
 package org.seqcode.projects.chexalign;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class ChExAlign {
 	protected CompositeXLFinderMultiCond xlFinder;
 	protected boolean normScore=true;
 		
-	public ChExAlign(AlignmentConfig config, XLAnalysisConfig xlcon, GenomeConfig gcon,ExptConfig econ, ExperimentManager eMan){
+	public ChExAlign(AlignmentConfig config, XLAnalysisConfig xlcon, GenomeConfig gcon,ExptConfig econ, ExperimentManager eMan) throws IOException{
 		this.config=config;
 		xlconfig = xlcon;
 		spts = config.getStrandedPoints();
@@ -83,7 +85,7 @@ public class ChExAlign {
 		xlFinder = new CompositeXLFinderMultiCond(gcon, econ, manager, xlconfig);
 	}
 	
-	public void alignAllPairwise(){
+	public void alignAllPairwise() throws IOException{
 		
 		System.out.println("\n============================ Profile alignment ============================");
 		
@@ -113,6 +115,16 @@ public class ChExAlign {
 			}
 		}
 		
+		if (config.getPrintScore()){
+			FileWriter fout = new FileWriter(xlconfig.getOutputIntermediateDir()+File.separator+this.filename+"similarities.txt");
+			fout.write("##raw similarity scores\n");
+			for (int i=0; i < numPoints;i++){
+				for (int j=i+1; j< numPoints; j++)
+					fout.write(pairwiseSimilarities[i][j]+",");
+				fout.write("\n");
+			}
+		}
+		
 		/**
 		System.out.println("raw similarity scores");
 		for (int i=0; i < numPoints; i++){
@@ -128,6 +140,7 @@ public class ChExAlign {
 				pairwiseSimilarities[i][j] = (pairwiseSimilarities[i][j]-minScore)/(maxScore-minScore);
 				pairwiseSimilarities[j][i] = (pairwiseSimilarities[j][i]-minScore)/(maxScore-minScore);
 		}}		
+		
 		
 		/**
 		System.out.println("normalized similarity scores");

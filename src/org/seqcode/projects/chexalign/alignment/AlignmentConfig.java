@@ -39,6 +39,7 @@ public class AlignmentConfig {
 	protected boolean sortforprint = false; // sort tag profiles before printing
 	protected boolean normalize = true;
 	protected boolean doReadFilter=false;	// Turn on per base read filter in case of highly duplicated experiment
+	protected boolean printScore=false;	// Print similarity scores to file
 	protected String filename;
 	
 	
@@ -117,6 +118,8 @@ public class AlignmentConfig {
 			debugMode = Args.parseFlags(args).contains("debug") ? true : false;
 			// Sort tag profile based on the order of input region
 			sortforprint = Args.parseFlags(args).contains("sort") ? true : false;
+			// Print similarity scores to file
+			printScore = Args.parseFlags(args).contains("printscore") ? true : false;
 			
 			spts = new ArrayList<StrandedPoint>();
 			if (ap.hasKey("cpoints")){
@@ -182,5 +185,6 @@ public class AlignmentConfig {
 	public boolean useNormalize(){return normalize;}
 	public double getSmoothingGaussianVariance(){return smoothingGaussianVariance;}
 	public boolean useReadFilter(){return doReadFilter;}
+	public boolean getPrintScore(){return printScore;}
 
 }
