@@ -9,7 +9,7 @@ N Yamada, MJ Rossi, N Farrell, BF Pugh, S Mahony .“Alignment and quantificatio
 
 Downloading Executables
 --------------
-  * ChExAlign version 0.1 (2019-12-10): [JAR](http://lugh.bmb.psu.edu/software/chexalign/chexalign_v0.1.jar)
+ * ChExAlign version 0.1 (2019-12-10): [JAR](http://lugh.bmb.psu.edu/software/chexalign/chexalign_v0.1.jar)
 
 Building from Source
 --------------
@@ -38,24 +38,24 @@ Options (Required/important options are in __bold__)
 
 __General__:
 
-  * --__out__ \<prefix>: Output file prefix. All output will be put into a directory with the prefix name. 
+ * --__out__ \<prefix>: Output file prefix. All output will be put into a directory with the prefix name. 
 
 __Specifying the Genome__:
 
-  * --__geninfo__ \<genome info file\>: This file should list the lengths of all chromosomes on separate lines using the format chrName\<tab\>chrLength. You can generate a suitable file from UCSC 2bit format genomes using the UCSC utility “twoBitInfo”. The chromosome names should be exactly the same as those used in your input list of genomic regions. 
+ * --__geninfo__ \<genome info file\>: This file should list the lengths of all chromosomes on separate lines using the format chrName\<tab\>chrLength. You can generate a suitable file from UCSC 2bit format genomes using the UCSC utility “twoBitInfo”. The chromosome names should be exactly the same as those used in your input list of genomic regions. 
    
       The genome info files for some UCSC genome versions:  
       | [hg18](http://lugh.bmb.psu.edu/software/multigps/support/hg18.info) | [hg19](http://lugh.bmb.psu.edu/software/multigps/support/hg19.info) | [hg38](http://lugh.bmb.psu.edu/software/multigps/support/hg38.info) | [mm8](http://lugh.bmb.psu.edu/software/multigps/support/mm8.info) | [mm9](http://lugh.bmb.psu.edu/software/multigps/support/mm9.info) | [mm10](http://lugh.bmb.psu.edu/software/multigps/support/mm10.info) | [rn4](http://lugh.bmb.psu.edu/software/multigps/support/rn4.info) | [rn5](http://lugh.bmb.psu.edu/software/multigps/support/rn5.info) | [danRer6](http://lugh.bmb.psu.edu/software/multigps/support/danRer6.info) | [ce10](http://lugh.bmb.psu.edu/software/multigps/support/ce10.info) | [dm3](http://lugh.bmb.psu.edu/software/multigps/support/dm3.info) | [sacCer2](http://lugh.bmb.psu.edu/software/multigps/support/sacCer2.info) | [sacCer3](http://lugh.bmb.psu.edu/software/multigps/support/sacCer3.info) |
 
 __Loading Data__:
 
-  * --__exptCONDNAME-REPNAME__ \<file\>: Defines a file containing reads from a signal experiment. Replace CONDNAME and REPNAME with appropriate condition and replicate labels.
-  * --__ctrlCONDNAME-REPNAME__ \<file\>: Optional arguments. Defines a file containing reads from a control experiment (such as mock ChIP, IgG or Input control). Replace CONDNAME and REPNAME with appropriate labels to match a signal experiment (i.e. to tell ChExAlign which condition/replicate this is a control for). If you leave out a REPNAME, this file will be used as a control for all replicates of CONDNAME.  
-  * --__format__ \<SAM/BAM/BED/IDX\>: Format of data files. All files must be the same format if specifying experiments on the command line. Supported formats are SAM/BAM, BED, and IDX index files.
+ * --__exptCONDNAME-REPNAME__ \<file\>: Defines a file containing reads from a signal experiment. Replace CONDNAME and REPNAME with appropriate condition and replicate labels.
+ * --__ctrlCONDNAME-REPNAME__ \<file\>: Optional arguments. Defines a file containing reads from a control experiment (such as mock ChIP, IgG or Input control). Replace CONDNAME and REPNAME with appropriate labels to match a signal experiment (i.e. to tell ChExAlign which condition/replicate this is a control for). If you leave out a REPNAME, this file will be used as a control for all replicates of CONDNAME.  
+ * --__format__ \<SAM/BAM/BED/IDX\>: Format of data files. All files must be the same format if specifying experiments on the command line. Supported formats are SAM/BAM, BED, and IDX index files.
  
 Instead of using the above options to specify each and every ChIP-exo data file on the command-line, you can instead use a design file:
  
-  * --__design__ \<file\>: A file that specifies the data files and their condition/replicate relationships. See [here](http://lugh.bmb.psu.edu/software/multigps/example.design) for an example design file. The file should be formatted to contain the following pieces of information for each data file, in this order and tab-separated:
+ * --__design__ \<file\>: A file that specifies the data files and their condition/replicate relationships. See [here](http://lugh.bmb.psu.edu/software/multigps/example.design) for an example design file. The file should be formatted to contain the following pieces of information for each data file, in this order and tab-separated:
   
     * File name
     * Label stating if this experiment is “signal” or “control”
@@ -86,20 +86,26 @@ Instead of using the above options to specify each and every ChIP-exo data file 
  
 __Running ChExAlign__:
 
-  * --__cpoints__ \<file\>: File of genomic positions to perform alignment. This can be genomic positions from peak results, or genomic annotations if you know that target proteins bind there.
-  * --cwin \<int\>: Window size for analyzing read profiles (default=400).
+ * --__bed__ \<file\>: Bed format file of genomic positions to perform alignment. This can be genomic positions from peak results, or genomic annotations if you know that target proteins bind there.
+
+Instead of using the bed file to specify genomic positions, you can instead use cpoints or points file:
+
+ * --cpoints \<file\>: File of genomic positions in point format.
+ * --points \<file\>: File of genomic positions in stranded point format.
+ 
+ * --cwin \<int\>: Window size for analyzing read profiles (default=400).
   
 __Alining Crosslinking Patterns__:
 
-  * --gap \<value\>: Gap open penalty (default=100). Use 1000 for non-gapped alignment.
-  * --extscaling \<value\>: Gap extension scaling factor (default=0.1). Increasing this parameter results in greater gap extension penalty.
-  * --sort: Flag to output per region alignment by the order of genomic position input file (default=off).
+ * --gap \<value\>: Gap open penalty (default=100). Use 1000 for non-gapped alignment.
+ * --extscaling \<value\>: Gap extension scaling factor (default=0.1). Increasing this parameter results in greater gap extension penalty.
+ * --sort: Flag to output per region alignment by the order of genomic position input file (default=off).
 
 __Quantifying Crosslinking Events__:
 
-  * --r \<int\>: Max. model update rounds (default=3).
-  * --xlsigma \<value\>: Crosslinking component sigma (default=6)
-  * --noposprior: Flag to turn off inter-experiment positional prior (default=on).
+ * --r \<int\>: Max. model update rounds (default=3).
+ * --xlsigma \<value\>: Crosslinking component sigma (default=6)
+ * --noposprior: Flag to turn off inter-experiment positional prior (default=on).
 
 Example
 --------------
