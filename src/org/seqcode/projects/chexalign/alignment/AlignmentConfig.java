@@ -7,6 +7,7 @@ import org.seqcode.data.io.RegionFileUtilities;
 import org.seqcode.genome.Genome;
 import org.seqcode.genome.GenomeConfig;
 import org.seqcode.genome.location.Point;
+import org.seqcode.genome.location.Region;
 import org.seqcode.genome.location.StrandedPoint;
 import org.seqcode.gseutils.ArgParser;
 import org.seqcode.gseutils.Args;
@@ -128,6 +129,10 @@ public class AlignmentConfig {
 				List<Point> pts = RegionFileUtilities.loadPointsFromFile(Args.parseString(args, "points", null), gen);
 				for (Point p : pts)
 					spts.add(new StrandedPoint(p,'+'));
+			}else if (ap.hasKey("bed")){
+				List<Region> regs = RegionFileUtilities.loadRegionsFromBEDFile(gen, Args.parseString(args, "bed", null), -1);
+				for (Region r : regs)
+					spts.add(new StrandedPoint(r.getMidpoint(), '+'));
 			}else{
 				System.err.println("Please provide --cpoints <stranded point file> OR --points <point file>");
 			}

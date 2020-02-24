@@ -507,7 +507,7 @@ public class ChExAlign {
 				"\t--scalewin <window size for scaling procedure (default=10000)>\n" +
 				"\t--plotscaling [flag to plot diagnostic information for the chosen scaling method]\n" +
 				" Running ChExAlign:\n" +
-				"\t--cpoints <file name (REQUIRED. file of genomic positions to perform alignment)>\n" +
+				"\t--cpoints OR <file name> --points <file name> OR --bed <file name> (REQUIRED. file of genomic positions to perform alignment)\t \n" +
 				"\t--cwin <window size for analyzing read profiles (default=400)>\n" +
 				"\t--gap <gap open penalty (default=100)>\n" +
 				"\t--extscaling <gap extension scaling factor; increase for larger gap-extension penalty (default=0.1)>\n" +
