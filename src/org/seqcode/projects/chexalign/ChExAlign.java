@@ -116,13 +116,14 @@ public class ChExAlign {
 		}
 		
 		if (config.getPrintScore()){
-			FileWriter fout = new FileWriter(xlconfig.getOutputIntermediateDir()+File.separator+this.filename+"similarities.txt");
+			FileWriter fout = new FileWriter(xlconfig.getOutputIntermediateDir()+File.separator+this.filename+"_similarities.txt");
 			fout.write("##raw similarity scores\n");
 			for (int i=0; i < numPoints;i++){
 				for (int j=i+1; j< numPoints; j++)
 					fout.write(pairwiseSimilarities[i][j]+",");
 				fout.write("\n");
 			}
+			fout.close();
 		}
 		
 		/**
@@ -295,7 +296,12 @@ public class ChExAlign {
 			Pair<double[][][], double[][][]> perPointTags = multialign.makePerPointCountsFromTagProfiles();
 			Pair<double[], double[]> ctrlCompositeTags = multialign.makeControlCompositeCounts();
 			xlFinder.executeOnAlignedCompoiste(multialign.getAlignedLength(), spts, perPointTags.car(), perPointTags.cdr(),ctrlCompositeTags.car(), ctrlCompositeTags.cdr());
+			System.out.println("Cross-linking analysis complete");
+		}else{
+			System.out.println("No crosslinking analysis is performed");
 		}
+		
+		System.out.println("ChExAlign analysis is finished");
 	
 	}
 	
