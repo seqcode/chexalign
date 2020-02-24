@@ -442,9 +442,10 @@ public class ChExAlign {
 	/**
 	 * Main driver method for ChExAlign
 	 * @param args
+	 * @throws IOException 
 	 * @throws Exception 
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 		System.setProperty("java.awt.headless", "true");
 		System.out.println("ChExAlign version "+AlignmentConfig.version+"\n\n");
 		GenomeConfig gcon = new GenomeConfig(args);
