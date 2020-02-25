@@ -133,6 +133,7 @@ public class AlignmentConfig {
 				List<Region> regs = RegionFileUtilities.loadRegionsFromBEDFile(gen, Args.parseString(args, "bed", null), -1);
 				for (Region r : regs)
 					spts.add(new StrandedPoint(r.getMidpoint(), '+'));
+			}else if (ap.hasKey("test")){
 			}else{
 				System.err.println("Please provide --cpoints <stranded point file> OR --points <point file>");
 			}
@@ -191,5 +192,8 @@ public class AlignmentConfig {
 	public double getSmoothingGaussianVariance(){return smoothingGaussianVariance;}
 	public boolean useReadFilter(){return doReadFilter;}
 	public boolean getPrintScore(){return printScore;}
+	
+	//Setter
+	public void setStrandedPoints(List<StrandedPoint> spoints){spts=spoints;}
 
 }
