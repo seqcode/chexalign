@@ -52,15 +52,15 @@ public class RandomRegionAlignment {
 
 		//Now, iteratively generate random positions and check if they are valid and not overlapping repeats. 
 		for (int i=0; i < numSamples; i++){
-			StrandedPoint p;				
 			long randPos = (long)(1+(rand.nextDouble()*genomeSize));
 			//find the chr
 			long total=0;
 			for(int c=0; c<numChroms; c++){
 				if(randPos<total+chromoSize[c]){
-					int pos = (int)(randPos-total+1);				
-					p = new StrandedPoint(gconfig.getGenome(), chromoNames[c], pos, '+');
-					points.add(p);
+					int pos = (int)(randPos-total+1);	
+					if (pos>0){
+						points.add(new StrandedPoint(gconfig.getGenome(), chromoNames[c], pos, '+'));
+					}
 				}total+=chromoSize[c];
 			}
 		}
