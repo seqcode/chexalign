@@ -271,8 +271,10 @@ public class SimilarityScore {
 		}	
 		
 		//perfect correlation
+		System.out.println("perfect correlation");
 		for (int l=0; l< w; l++)
 			sim.computeScore(l, l, n_watson_a, n_watson_a, n_crick_a, n_crick_a);
+		System.out.println();
 		
 		// for perfect anti-correlation
 		double[][] n_watson_b = new double[numCond][w];
@@ -284,8 +286,9 @@ public class SimilarityScore {
 			}
 		}
 		
+		System.out.println("perfect anti-correlation");
 		for (int l=0; l< w; l++)
 			sim.computeScore(l, l, n_watson_a, n_watson_b, n_crick_a, n_crick_b);
-	
+		System.out.println();
 	}
 }
