@@ -272,7 +272,7 @@ public class SimilarityScore {
 		
 		//perfect correlation
 		for (int l=0; l< w; l++)
-			sim.computeScore(l, l, n_watson_a, n_crick_a, n_watson_a, n_crick_a);
+			sim.computeScore(l, l, n_watson_a, n_watson_a, n_crick_a, n_crick_a);
 		
 		// for perfect anti-correlation
 		double[][] n_watson_b = new double[numCond][w];
@@ -283,6 +283,9 @@ public class SimilarityScore {
 				n_crick_b[c][l] = 1 - n_crick_a[c][l];
 			}
 		}
+		
+		for (int l=0; l< w; l++)
+			sim.computeScore(l, l, n_watson_a, n_watson_b, n_crick_a, n_crick_b);
 	
 	}
 }
