@@ -1,5 +1,9 @@
 package org.seqcode.projects.chexalign.alignment;
 
+import java.util.Random;
+
+import org.seqcode.genome.GenomeConfig;
+
 /**
  * SimilarityScore: Computes similarity scores based on distance metrics described in the following paper.
  * Comprehensive Survey on Distance/Similarity Measures between Probability Density Functions: Sung-Hyuk Cha
@@ -246,5 +250,39 @@ public class SimilarityScore {
 		if (Math.sqrt(varA)*Math.sqrt(varB)!=0)
 			corr=cov/(Math.sqrt(varA)*Math.sqrt(varB));
 		return corr;
+	}
+	
+	// Main for testing
+	public static void main(String[] args){
+		GenomeConfig gcon = new GenomeConfig(args);
+		AlignmentConfig config = new AlignmentConfig(gcon, args);
+		int numCond = 5;
+		int w = 100;
+		
+		SimilarityScore sim = new SimilarityScore(config, numCond);
+		
+		double[][] n_watson_a = new double[numCond][w];
+		double[][] n_crick_a = new double[numCond][w];
+		for (int c=0; c < numCond; c++){
+			for (int l=0; l< w; l++){
+				n_watson_a[c][l] = (new Random()).nextDouble();
+				n_crick_a[c][l] = (new Random()).nextDouble();
+			}
+		}	
+		
+		//perfect correlation
+		for (int l=0; l< w; l++)
+			sim.computeScore(l, l, n_watson_a, n_crick_a, n_watson_a, n_crick_a);
+		
+		// for perfect anti-correlation
+		double[][] n_watson_b = new double[numCond][w];
+		double[][] n_crick_b = new double[numCond][w];
+		for (int c=0; c < numCond; c++){
+			for (int l=0; l<w; l++){
+				n_watson_b[c][l]= 1 - n_watson_a[c][l];
+				n_crick_b[c][l] = 1 - n_crick_a[c][l];
+			}
+		}
+	
 	}
 }
