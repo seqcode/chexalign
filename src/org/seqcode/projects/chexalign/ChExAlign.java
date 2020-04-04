@@ -284,6 +284,7 @@ public class ChExAlign {
 		// print alignment results
 		multialign.printOriginalRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, win, config.useSortForPrint());
 		multialign.printAlignedRegionsToFile(xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
+		multialign.printAlignmentCenterToFile(xlconfig.getOutputParentDir()+File.separator+this.filename, config.useSortForPrint());
 		
 		multialign.printOriginalTagsToFile(manager, signalComposite, xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
 		multialign.printAlignedTagsToFile(manager, xlconfig.getOutputIntermediateDir()+File.separator+this.filename, config.useSortForPrint());
