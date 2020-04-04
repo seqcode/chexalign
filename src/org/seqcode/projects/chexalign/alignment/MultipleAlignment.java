@@ -556,7 +556,7 @@ public class MultipleAlignment {
 						break;
 					}
 				}
-				String outstring=chr+"\t"+centercoord+"\t"+	(centercoord+1)+"\t.\t.\t"+strand+"\n";
+				String outstring="chr"+chr+"\t"+centercoord+"\t"+	(centercoord+1)+"\t.\t.\t"+strand+"\n";
 				fout.write(outstring);
 				
 			}fout.close();
