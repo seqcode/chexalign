@@ -522,6 +522,50 @@ public class MultipleAlignment {
 		}
 	}
 	
+	public void printAlignmentCenterToFile(String prefix, boolean sort){
+		//sort by ids
+		if (sort)
+			Arrays.sort(profileAlignment);
+		try {
+			FileWriter fout = new FileWriter(prefix+"_alignmentcenter.bed");
+			for (TagProfile profile: profileAlignment){
+				String chr=profile.getStrandedPoint().getChrom();
+				char strand ;
+				int centercoord =1; int start=-1;int end=-1;
+				// search for start
+				for (int w=0; w < alignL; w++){
+					if (profile.getCoords()[w]>-1){
+						start= profile.getCoords()[w];
+						break;
+					}}	
+				//search for end
+				for (int w=alignL-1; w >=0; w--){
+					if (profile.getCoords()[w]>-1){
+						end= profile.getCoords()[w];
+						break;
+					}}
+				if (start <end){strand='+';}
+				else{strand='-';}
+				//serach for center
+				for (int w=0; w<alignL/2;w++){
+					if (profile.getCoords()[alignL/2+w]>-1){
+						centercoord=profile.getCoords()[alignL/2+w];
+						break;
+					}else if (profile.getCoords()[alignL/2-w]>-1){
+						centercoord=profile.getCoords()[alignL/2-w];
+						break;
+					}
+				}
+				String outstring=chr+"\t"+centercoord+"\t"+	(centercoord+1)+"\t.\t.\t"+strand+"\n";
+				fout.write(outstring);
+				
+			}fout.close();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void printOriginalTagsToFile(ExperimentManager manager, CompositeTagDistribution maker, String prefix, boolean sort){
 		//Sort by ids
 		if (sort)
