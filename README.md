@@ -125,10 +125,26 @@ You can run the following python scripts to visualize your results. Run this to 
 python plotStrandSeparateCompositeMultiExpt.py flist.txt 500 100 normalize
 ```
 
+`flist.txt` should contains a list of ChExAlign output files. Each line in `flist.txt` should contain single file path as following:
+
+```{r, engine='sh', count_lines}
+chexalign-test/chexalign-test_composite.Rap1.txt
+chexalign-test/chexalign-test_composite.Sfp1.txt
+chexalign-test/chexalign-test_composite.Ifh1.txt
+```
+
 Run this to make PCA and MDS plots.
 
 ```{r, engine='sh', count_lines}
-python reduce.py inputfilelist.txt
+python reduce.py inputflist.txt 
+```
+
+`inputflist.txt` should contain a list of ChExAlign output files as following:
+
+```{r, engine='sh', count_lines}
+chexalign-test/chexalign-test_site-component-ML.Sfp1.txt
+chexalign-test/chexalign-test_site-component-ML.Hmo1.txt
+chexalign-test/chexalign-test_site-component-ML.Ifh1.txt
 ```
 
 Output files
