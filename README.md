@@ -122,7 +122,7 @@ Expected results are named chexalign-test and can be found in the same file.
 You can run the following python scripts to visualize your results. Run this to make an alignment figure.
 
 ```{r, engine='sh', count_lines}
-python plotStrandSeparateCompositeMultiExpt.py chexalign-test/chexalign-test_composite chexalign-test_composite 500 100 normalize
+python plotStrandSeparateCompositeMultiExpt.py flist.txt 500 100 normalize
 ```
 
 Run this to make PCA and MDS plots.
