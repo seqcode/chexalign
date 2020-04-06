@@ -128,7 +128,7 @@ python plotStrandSeparateCompositeMultiExpt.py flist.txt 500 100 normalize
 Run this to make PCA and MDS plots.
 
 ```{r, engine='sh', count_lines}
-python reduce.py
+python reduce.py inputfilelist.txt
 ```
 
 Output files
