@@ -126,7 +126,7 @@ You can run the following python scripts to visualize your results. Run this to 
 python plotStrandSeparateCompositeMultiExpt.py flist.txt 500 100 normalize
 ```
 
-`flist.txt` should contains a list of ChExAlign output files. Each line in `flist.txt` should contain single file path as following:
+`flist.txt` should contain a list of ChExAlign output files. Each line should indicate single file path as following:
 
 ```{r, engine='sh', count_lines}
 chexalign-test/chexalign-test_composite.Rap1.txt
