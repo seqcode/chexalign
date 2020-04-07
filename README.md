@@ -110,7 +110,7 @@ __Quantifying Crosslinking Events__:
 
 Example
 --------------
-This example runs ChExAlign v0.11 on ribosomal protein gene (RPG) datasets (NCBI Sequence Read Archive under accession number SRP041518) presented in Figure 1 from the paper. The bam files include ChIP-exo data for Rap1, Hmo1, Sfp1, Ifh1, Fhl1, and control experiment. The version of ChExAlign and all files required to run this analysis are in this file: [chexalign-yeast-example.tar.gz](http://lugh.bmb.psu.edu/software/chexalign/examples/chexalign-yeast-example.tar.gz)
+This example runs ChExAlign v0.11 on ribosomal protein gene (RPG) datasets (NCBI Sequence Read Archive under accession number SRP041518) presented in Figure 1 from the paper. The bam files include ChIP-exo data for Rap1, Hmo1, Sfp1, Ifh1, Fhl1, and control experiment. The version of ChExAlign and all files except for python scripts required to run this analysis are in this file: [chexalign-yeast-example.tar.gz](http://lugh.bmb.psu.edu/software/chexalign/examples/chexalign-yeast-example.tar.gz).
 
 Let’s demonstrate how ChExAlign works. Note that this example only uses the top 20 RPG sites to save time.
 
@@ -120,13 +120,13 @@ java -Xmx8G -jar chexalign.public.jar --geninfo sacCer3.info --cpoints rp-127rpg
 
 Expected results are named chexalign-test and can be found in the same file.
 
-You can run the following python scripts to visualize your results. Run this to make an alignment figure.
+To visualize your results, you need to download python scripts located [here](https://github.com/seqcode/chexalign/tree/master/pythonscripts) and put these scripts under `chexalign-yeast-example` directory. Run [this](https://github.com/seqcode/chexalign/blob/master/pythonscripts/plotStrandSeparateCompositeMultiExpt.py) to make an alignment figure.
 
 ```{r, engine='sh', count_lines}
 python plotStrandSeparateCompositeMultiExpt.py flist.txt 500 100 normalize
 ```
 
-`flist.txt` should contain a list of ChExAlign output files. Each line should indicate single file path as following:
+`flist.txt` should contain a list of ChExAlign output files. Each line should indicate a single file path as following:
 
 ```{r, engine='sh', count_lines}
 chexalign-test-results/chexalign-test-results_composite.Rap1.txt
@@ -134,7 +134,7 @@ chexalign-test-results/chexalign-test-results_composite.Sfp1.txt
 chexalign-test-results/chexalign-test-results_composite.Ifh1.txt
 ```
 
-Run this to make PCA and MDS plots.
+Run [this](https://github.com/seqcode/chexalign/blob/master/pythonscripts/reduce.py) to make PCA and MDS plots.
 
 ```{r, engine='sh', count_lines}
 python reduce.py inputflist.txt 
