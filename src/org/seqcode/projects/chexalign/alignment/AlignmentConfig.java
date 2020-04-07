@@ -21,7 +21,7 @@ import org.seqcode.gseutils.Args;
  */
 public class AlignmentConfig {
 	
-	public static String version = "0.1";
+	public static String version = "0.11";
 	protected boolean printHelp=false;
 	protected GenomeConfig gconfig;
 	protected Genome gen=null;
