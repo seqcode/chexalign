@@ -16,6 +16,8 @@ public class AlignedCompositeTagDistribution extends CompositeTagDistribution {
 	public double[][] makeComposite(double[][][] perPointCounts, double[] ctrlComposite){
 		System.out.println("numConditions :"+numConditions);
 		System.out.println("win :"+win);
+		win=perPointCounts[0][0].length;
+		System.out.println("win :"+win);
 		double[][] composite= new double[numConditions][win];
 		for (int p=0; p < numPoints; p++)
 			for (int c=0; c < numConditions; c++)
