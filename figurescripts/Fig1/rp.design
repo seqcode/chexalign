@@ -1,0 +1,6 @@
+/storage/home/nuy11/group/seqalign/reads/Pugh/Pugh_Reja/Rap1_i5006_BY4741_-_YPD_MHS25-15_XO2_bfp2-111111_Pugh10703sacCer3.bam	Signal	BAM	Rap1	1
+/storage/home/nuy11/group/seqalign/reads/Pugh/Pugh_Reja/Hmo1_i5006_BY4741_-_YPD_MHS25-15_XO2_bfp2-111111_Pugh10705sacCer3.bam	Signal	BAM	Hmo1	1
+/storage/home/nuy11/group/seqalign/reads/Pugh/Pugh_Reja/Sfp1_i5006_BY4741_-_YPD_MHS25-15_XO2_bfp2-111111_Pugh10704sacCer3.bam	Signal	BAM	Sfp1	1
+/storage/home/nuy11/group/seqalign/reads/Pugh/Pugh_Reja/Ifh1_i5006_BY4741_-_YPD_MHS25-15_rep1_Pugh54519sacCer3.bam	Signal	BAM	Ifh1	1
+/storage/home/nuy11/group/seqalign/reads/Pugh/Pugh_Reja/Fhl1_i5006_BY4741_-_YPD_MHS25-15_rep1_Pugh54529sacCer3.bam	Signal	BAM	Fhl1	1
+/gpfs/group/sam77/default/seqalign/reads/Pugh/yeast-encode/master_notag/masterNotag_20170213.bam	Control	BAM
