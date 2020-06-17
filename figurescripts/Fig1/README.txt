@@ -9,10 +9,10 @@ python makeheatmap_2color.py $mat 20 rc
 done
 
 #Figure 1E (left and middle panel)
-python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs-200_composite rp-127rpgs_composite 550 50 normalize
-python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs-200_aligned_composite rp-127rpgs_aligned_composite 300 300 normalize
+python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs/rp-127rpgs_composite rp-127rpgs_composite 550 50 normalize
+python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs/rp-127rpgs_aligned_composite rp-127rpgs_aligned_composite 300 300 normalize
 
 #To create Figure 1E (right panel)
 java -Xmx8G -jar chexalign.public.jar --geninfo sacCer3.info --cpoints rap1-at-127RPGs.points --exptRap1 Rap1.bam --exptHmo1 Hmo1.bam --exptSfp1 Sfp1.bam --exptIfh1 Ifh1.bam --exptFhl1 Fhl1.bam --ctrl Control.bam --format BAM --out rp-127rpgs-rap1motif --gap 200 --cwin 1400 > rp-127rpgs-rap1motif.out
 
-python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs-rap1motif_composite rp-127rpgs-rap1motif_composite 200 400 normalize
+python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs-rap1motif/rp-127rpgs-rap1motif_composite rp-127rpgs-rap1motif_composite 200 400 normalize
