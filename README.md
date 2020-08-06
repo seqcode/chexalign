@@ -15,6 +15,7 @@ N Yamada, MJ Rossi, N Farrell, BF Pugh, S Mahony .“Alignment and quantificatio
 
 Downloading Executables
 --------------
+ * ChExAlign version 0.12 (2020-08-05): [JAR](http://lugh.bmb.psu.edu/software/chexalign/chexalign_v0.12.jar)
  * ChExAlign version 0.11 (2020-04-06): [JAR](http://lugh.bmb.psu.edu/software/chexalign/chexalign_v0.11.jar)
  * ChExAlign version 0.1 (2019-12-10): [JAR](http://lugh.bmb.psu.edu/software/chexalign/chexalign_v0.1.jar)
 
@@ -163,6 +164,7 @@ Contact
 For queries, please contact Naomi (nuy11@psu.edu) or Shaun Mahony (mahony@psu.edu).
 
 Major History:
---------------  
+-------------- 
+Version 0.12 (2020-08-05): Fixed bugs on sequence generation using jar file. 
 Version 0.11 (2020-04-06): Added classes to perform alignment using random regions and to output Pearson correlation scores from random input arrays. Support bed file as input. Re-organize output files.
 Version 0.1 (2019-11-05): Initial release.
