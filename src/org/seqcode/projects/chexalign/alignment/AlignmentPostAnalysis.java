@@ -51,17 +51,12 @@ public class AlignmentPostAnalysis {
 	protected int numRegs;
 	protected int len;
 	
-	public AlignmentPostAnalysis(GenomeConfig gconfig, ArrayList<String[]> coords, boolean useCache, boolean rc, String outName, boolean makesummary, boolean singlepos){
+	public AlignmentPostAnalysis(GenomeConfig gconfig, ArrayList<String[]> coords, boolean rc, String outName, boolean makesummary, boolean singlepos){
 		gen=gconfig.getGenome();
 		this.coords = coords;
 		outFileName = outName;
 		seqgen = gconfig.getSequenceGenerator();
 		seqgen.useCache(true);
-//		seqgen = new SequenceGenerator();
-//		seqgen.useCache(useCache);
-//		if(useCache){
-//			seqgen.setGenomePath(seqPath);
-//		}
 		revComplement=rc;
 		numRegs = coords.size();
 		len = coords.get(0).length;
@@ -299,15 +294,11 @@ public class AlignmentPostAnalysis {
 		String backName = Args.parseString(args,"mback", null);
 		double minthres = Args.parseDouble(args, "mthres", 0);
 		String outName = Args.parseString(args, "out", "motifout");
-		boolean useCache = Args.parseFlags(args).contains("cache") ? true : false;
 		boolean rc = Args.parseFlags(args).contains("rc") ? true : false;
 		boolean strandedScore = Args.parseFlags(args).contains("notstranded") ? false : true;
 		boolean singlepos = Args.parseFlags(args).contains("singlepos") ? true: false;
 		boolean makesummary = Args.parseFlags(args).contains("summary") ? true: false;
-//		String seqPathName="";
-//		if(useCache){
-//			seqPathName = Args.parseString(args, "seq", "");
-//		}
+
 		List<StrandedPoint> spts = null;
 		if (ap.hasKey("points"))
 			spts = RegionFileUtilities.loadStrandedPointsFromFile(gen, Args.parseString(args, "points", null));
@@ -339,8 +330,7 @@ public class AlignmentPostAnalysis {
 				coords.add(words);
 		}	
 		
-	//	AlignmentPostAnalysis analysis = new AlignmentPostAnalysis(gen, coords, useCache, rc, seqPathName, outName, makesummary, singlepos);
-		AlignmentPostAnalysis analysis = new AlignmentPostAnalysis(gcon, coords, useCache, rc, outName, makesummary, singlepos);
+		AlignmentPostAnalysis analysis = new AlignmentPostAnalysis(gcon, coords, rc, outName, makesummary, singlepos);
 
 		if (!motifs.isEmpty())
 			analysis.executeMotifMaker(motifs.get(0), back, minthres, strandedScore);
@@ -351,10 +341,9 @@ public class AlignmentPostAnalysis {
 	}
 
 	private static void printError(){
-		System.err.println("Usage: AlignmentPostAnalysis --species <organism;genome> --seq <sequence path path>\n" +
+		System.err.println("Usage: AlignmentPostAnalysis --geninfo <genome info file> --seq <sequence path path>\n" +
 				"--motif <motif names> --mback <background model name> --mthres <threshold>\n" +
-				"--posf <coordinate file name> --out <output root name> \n" +
-				"--color <red/green/blue> \n");
+				"--posf <coordinate file name> --out <output root name> \n");
 		System.exit(1);
 	}
 }
