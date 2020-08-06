@@ -8,6 +8,15 @@ python makecomposite.py $mat rc
 python makeheatmap_2color.py $mat 20 rc
 done
 
+#Figure 1C
+java -cp chexalign.public.jar org.seqcode.projects.chexalign.alignment.AlignmentPostAnalysis --geninfo sacCer3.info --mback sacCer3.back --mthres 0.1 --posf rp-127rpgs/intermediate-results/rp-127rpgs_original.regions --notstranded --out rp-127rpgs_original_rap1motif --seq sacCer3.fa --motif rap1.motif
+python makemotifplot.py rp-127rpgs_original_rap1motif.out blue
+
+#Figure 1D
+java -cp chexalign.public.jar org.seqcode.projects.chexalign.alignment.AlignmentPostAnalysis --geninfo sacCer3.info --mback sacCer3.back --mthres 0.1 --posf rp-127rpgs/intermediate-results/rp-127rpgs_aligned.regions --notstranded --out rp-127rpgs_aligned_rap1motif --seq sacCer3.fa --motif rap1.motif
+
+python makemotifplot.py rp-127rpgs_aligned_rap1motif.out blue
+
 #Figure 1E (left and middle panel)
 python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs/rp-127rpgs_composite rp-127rpgs_composite 550 50 normalize
 python plotStrandSeparateCompositeMultiExpt.py rp-127rpgs/rp-127rpgs_aligned_composite rp-127rpgs_aligned_composite 300 300 normalize
