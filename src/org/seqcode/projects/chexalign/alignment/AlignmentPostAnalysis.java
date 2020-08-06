@@ -51,15 +51,17 @@ public class AlignmentPostAnalysis {
 	protected int numRegs;
 	protected int len;
 	
-	public AlignmentPostAnalysis(Genome genome, ArrayList<String[]> coords, boolean useCache, boolean rc, String seqPath, String outName, boolean makesummary, boolean singlepos){
-		gen=genome;
+	public AlignmentPostAnalysis(GenomeConfig gconfig, ArrayList<String[]> coords, boolean useCache, boolean rc, String outName, boolean makesummary, boolean singlepos){
+		gen=gconfig.getGenome();
 		this.coords = coords;
 		outFileName = outName;
-		seqgen = new SequenceGenerator();
-		seqgen.useCache(useCache);
-		if(useCache){
-			seqgen.setGenomePath(seqPath);
-		}
+		seqgen = gconfig.getSequenceGenerator();
+		seqgen.useCache(true);
+//		seqgen = new SequenceGenerator();
+//		seqgen.useCache(useCache);
+//		if(useCache){
+//			seqgen.setGenomePath(seqPath);
+//		}
 		revComplement=rc;
 		numRegs = coords.size();
 		len = coords.get(0).length;
@@ -302,10 +304,10 @@ public class AlignmentPostAnalysis {
 		boolean strandedScore = Args.parseFlags(args).contains("notstranded") ? false : true;
 		boolean singlepos = Args.parseFlags(args).contains("singlepos") ? true: false;
 		boolean makesummary = Args.parseFlags(args).contains("summary") ? true: false;
-		String seqPathName="";
-		if(useCache){
-			seqPathName = Args.parseString(args, "seq", "");
-		}
+//		String seqPathName="";
+//		if(useCache){
+//			seqPathName = Args.parseString(args, "seq", "");
+//		}
 		List<StrandedPoint> spts = null;
 		if (ap.hasKey("points"))
 			spts = RegionFileUtilities.loadStrandedPointsFromFile(gen, Args.parseString(args, "points", null));
@@ -337,7 +339,9 @@ public class AlignmentPostAnalysis {
 				coords.add(words);
 		}	
 		
-		AlignmentPostAnalysis analysis = new AlignmentPostAnalysis(gen, coords, useCache, rc, seqPathName, outName, makesummary, singlepos);
+	//	AlignmentPostAnalysis analysis = new AlignmentPostAnalysis(gen, coords, useCache, rc, seqPathName, outName, makesummary, singlepos);
+		AlignmentPostAnalysis analysis = new AlignmentPostAnalysis(gcon, coords, useCache, rc, outName, makesummary, singlepos);
+
 		if (!motifs.isEmpty())
 			analysis.executeMotifMaker(motifs.get(0), back, minthres, strandedScore);
 		else if (spts!=null)
