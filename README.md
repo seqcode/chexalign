@@ -1,3 +1,9 @@
+[![Anaconda-Server Badge](https://anaconda.org/bioconda/chexalign/badges/installer/conda.svg)](https://anaconda.org/bioconda/chexalign) 
+[![Anaconda-Server Badge](https://anaconda.org/bioconda/chexalign/badges/downloads.svg)](https://anaconda.org/bioconda/chexalign)
+[![Anaconda-Server Badge](https://anaconda.org/bioconda/chexalign/badges/platforms.svg
+)](https://anaconda.org/bioconda/chexalign)
+[![Anaconda-Server Badge](https://anaconda.org/bioconda/chexalign/badges/license.svg)](https://anaconda.org/bioconda/chexalign)
+
 # ChExAlign
 ChExAlign: alignment and quantification of ChIP-exo crosslinking patterns
 
